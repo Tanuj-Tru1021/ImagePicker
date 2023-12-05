@@ -11,7 +11,8 @@ const Avatar = () => {
                 width: 300,
                 height: 400,
                 cropping: true,
-                cropperCircleOverlay: false
+                cropperCircleOverlay: false,
+                saveToPhotos :true
             })
             setSelectedImage(image.path)
         } catch (error) {
@@ -28,6 +29,7 @@ const Avatar = () => {
                     height: 400,
                     cropperCircleOverlay: false
                 })
+                
                 setSelectedImage(croppedImage.path)
             } else {
                 console.log("No image was selected.")
@@ -37,14 +39,14 @@ const Avatar = () => {
         }
     }
     return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff' }}>
+        <View>
             <Text style={{ fontSize: 20, color: 'black', fontWeight: 500 }}>
                 Please select an image from gallery.
             </Text>
             <TouchableOpacity
                 style={{
                     backgroundColor: 'blue', marginTop: 20,
-                    padding: 15, justifyContent: 'center',
+                    paddingVertical: 15, justifyContent: 'center',
                     alignItems: 'center', borderRadius: 8
                 }}
                 onPress={selectImage}
