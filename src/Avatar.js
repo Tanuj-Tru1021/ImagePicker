@@ -4,15 +4,16 @@ import ImagePicker from 'react-native-image-crop-picker';
 
 const Avatar = () => {
 
-    const [selectedImage, setSelectedImage] = useState(null)
+    const [selectedImage, setSelectedImage] = useState('')
     const selectImage = async () => {
         try {
-            const image = ImagePicker.openPicker({
+            const image = await ImagePicker.openPicker({
                 width: 300,
                 height: 400,
                 cropping: true,
                 cropperCircleOverlay: false,
-                saveToPhotos :true
+                freeStyleCropEnabled: true,
+                saveToPhotos: true
             })
             setSelectedImage(image.path)
         } catch (error) {
@@ -27,9 +28,9 @@ const Avatar = () => {
                     path: selectedImage,
                     width: 300,
                     height: 400,
-                    cropperCircleOverlay: false
+                    cropperCircleOverlay: false,
+                    freeStyleCropEnabled: true
                 })
-                
                 setSelectedImage(croppedImage.path)
             } else {
                 console.log("No image was selected.")
@@ -39,7 +40,7 @@ const Avatar = () => {
         }
     }
     return (
-        <View>
+        <View style={{ flex: 1, justifyContent: 'center' }}>
             <Text style={{ fontSize: 20, color: 'black', fontWeight: 500 }}>
                 Please select an image from gallery.
             </Text>
@@ -59,7 +60,7 @@ const Avatar = () => {
                 <>
                     <Image
                         source={{ uri: selectedImage }}
-                        style={{ aspectRatio: 16 / 9 }}
+                        style={{ height: 200, width: 200, marginTop: 20, alignSelf:'center' }}
                     />
                     <TouchableOpacity
                         style={{
